@@ -1,12 +1,3 @@
-/*
-NOTE: Created a game where you play agaisnt PC instead of 2 human players.
-
-Apologies to whoever is reading this, quite a bit of logic
-
-*I would like to ensure my grid size does not change after appendChild (append the img to the li element). Not sure how to go about this.
-*/
-
-
 //Loading in important HTML elements and hiding some buttons
 let grid = document.querySelector('.grid')
 grid.style.display = 'none'
@@ -17,7 +8,7 @@ reset.style.display = 'none'
 let boxes = document.querySelectorAll('.box')
 
 
-//Wait for player to choose mode 
+//Wait for player to choose mode
 document.querySelector('#firstPlayer').addEventListener('click', () => {
   startGameAsFirstPlayer()
 })
@@ -36,6 +27,8 @@ let mock = [[10, 10, 10],[10, 10, 10],[10, 10, 10]]
 //The code below are all for 1st player mode
 function startGameAsFirstPlayer() {
   grid.style.display = 'flex'
+  document.querySelector("body").style.marginTop = '100px'
+
   document.querySelectorAll('button').forEach((button, idx) => {
     button.style.display = 'none'
   })
@@ -67,7 +60,7 @@ function addImageAsFirstPlayer(element) {
       var rndInt = Math.floor(Math.random() * arr.length)
       var chosenElementId = `box${arr[rndInt]}`
     }
-    
+
     chosenElement = document.querySelector(`#${chosenElementId}`)
     let img = document.createElement('img')
 
@@ -111,7 +104,7 @@ function addImageAsFirstPlayer(element) {
     mock[x][y] = 1
 
     arr.splice(position, 1)
-  } 
+  }
 
   count ++
 
@@ -172,6 +165,7 @@ function resetHelper1() {
 
   //reset webpage once button is clicked
   reset.addEventListener('click', () => {
+    document.querySelector("body").style.marginTop = '200px'
     images = document.querySelectorAll('.gameImage')
     images.forEach((img, idx) => {
       img.remove()
@@ -190,6 +184,7 @@ function resetHelper1() {
     document.querySelector('.winLose').innerHTML = ''
 
     reset.style.display = 'none'
+
   })
 }
 
@@ -223,7 +218,7 @@ function checkGameOver() {
     youWin()
     return true
   }
-  
+
 
   //check for robot's win
   //check horizontal
@@ -274,13 +269,14 @@ function tie() {
 //The code below is very similar to above, but for playing as a 2nd player
 function startGameAsSecondPlayer() {
   grid.style.display = 'flex'
+  document.querySelector("body").style.marginTop = '100px';
   document.querySelectorAll('button').forEach((button, idx) => {
     button.style.display = 'none'
   })
-  
+
   setTimeout(function() {addImageAsSecondPlayer('robot')}, 500)
   setTimeout(enableClick2, 499)
-  
+
 }
 
 
@@ -351,7 +347,7 @@ function addImageAsSecondPlayer(element) {
 
     arr.splice(position, 1)
 
-  } 
+  }
 
   count ++
 
@@ -388,6 +384,7 @@ function resetHelper2() {
   window.scrollTo(0, document.body.scrollHeight)
 
   reset.addEventListener('click', () => {
+    document.querySelector("body").style.marginTop = '200px'
     images = document.querySelectorAll('.gameImage')
     images.forEach((img, idx) => {
       img.remove()
@@ -433,88 +430,3 @@ function enableClick2() {
     box.addEventListener('click', helpStart2)
   })
 }
-
-
-// Make machine play itself
-function trainFirstPlayerMode(n) {
-  //make ai play n games agaisnt itself
-
-  for (let j = 0; j < n; j ++) {
-    document.querySelector('#firstPlayer').click()
-
-    //choose box as 1st player
-    while (arr.length != 0 && checkGameOver() == false) {
-    let rndInt = Math.floor(Math.random() * arr.length)
-    let chosenElementId = `box${arr[rndInt]}`
-    let chosenElement = document.querySelector(`#${chosenElementId}`)
-    let img = document.createElement('img')
-
-    img.setAttribute('src', 'tick.jpg')
-    img.className = 'gameImage'
-
-    chosenElement.appendChild(img)
-
-    let id = parseInt(chosenElementId.charAt(3))
-
-    coordinates = getCoordinates(id)
-    let x = coordinates[0]
-    let y = coordinates[1]
-
-    mock[x][y] = 1
-
-    arr.splice(rndInt, 1)
-
-    //wait for robot to play before continuing
-    if(checkGameOver()) {
-      break
-    }
-
-    if(arr.length == 0) {
-      tie()
-      break
-    }
-
-    count ++
-    addImageAsFirstPlayer('robot')
-  }
-
-    resetHelper1()
-    reset.click()
-  }
-
-  console.log(`Finished Training ${n} times`)
-  
-}
-
-// trainFirstPlayerMode(100)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class ai() {
-
-//   constructor() {
-//     //maps state to action
-//     this.dict = {}
-//   }
-
-//   aiMakesMove(state, action) {
-//     this.dict[state] = action
-//   }
-
-//   chooseFromBestAvailableAction(state) {
-//     let availableActions = this.dict[state]
-//     let bestAction = availableActions
-//   }
-
-// }
