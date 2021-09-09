@@ -62,7 +62,7 @@ function addImageAsFirstPlayer(element) {
     }
 
     chosenElement = document.querySelector(`#${chosenElementId}`)
-    chosenElement.innerHTML = 'x'
+    chosenElement.innerHTML = 'X'
 
     let id = parseInt(chosenElementId.charAt(3))
 
@@ -77,13 +77,13 @@ function addImageAsFirstPlayer(element) {
 
 
   //If person clicks on used box
-  if (element.innerHTML == "x" || element.innerHTML == "o") {
+  if (element.innerHTML == "X" || element.innerHTML == "O") {
     return
   }
 
   if (count%2 === 1) {
 
-    element.innerHTML = 'o'
+    element.innerHTML = 'O'
 
     let id = parseInt(element.id.charAt(3))
     let position = arr.indexOf(id)
@@ -295,7 +295,7 @@ function addImageAsSecondPlayer(element) {
     }
 
     chosenElement = document.querySelector(`#${chosenElementId}`)
-    chosenElement.innerHTML = 'o'
+    chosenElement.innerHTML = 'O'
 
     let id = parseInt(chosenElementId.charAt(3))
 
@@ -310,13 +310,13 @@ function addImageAsSecondPlayer(element) {
 
 
   //If person clicks on used box
-  if (element.innerHTML == "x" || element.innerHTML == "o") {
+  if (element.innerHTML == "X" || element.innerHTML == "O") {
     return
   }
 
   if (count%2 === 0) {
 
-    element.innerHTML = 'x'
+    element.innerHTML = 'X'
 
     let id = parseInt(element.id.charAt(3))
     let position = arr.indexOf(id)
