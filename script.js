@@ -62,12 +62,7 @@ function addImageAsFirstPlayer(element) {
     }
 
     chosenElement = document.querySelector(`#${chosenElementId}`)
-    let img = document.createElement('img')
-
-    img.setAttribute('src', 'cross.jpg')
-    img.className = 'gameImage'
-
-    chosenElement.appendChild(img)
+    chosenElement.innerHTML = 'x'
 
     let id = parseInt(chosenElementId.charAt(3))
 
@@ -82,17 +77,13 @@ function addImageAsFirstPlayer(element) {
 
 
   //If person clicks on used box
-  if (element.className == 'gameImage') {
+  if (element.innerHTML == "x" || element.innerHTML == "o") {
     return
   }
 
   if (count%2 === 1) {
-    //person's turn
-    let img = document.createElement('img')
-    img.setAttribute('src', 'tick.jpg')
-    img.className = 'gameImage'
 
-    element.appendChild(img)
+    element.innerHTML = 'o'
 
     let id = parseInt(element.id.charAt(3))
     let position = arr.indexOf(id)
@@ -166,9 +157,9 @@ function resetHelper1() {
   //reset webpage once button is clicked
   reset.addEventListener('click', () => {
     document.querySelector("body").style.marginTop = '200px'
-    images = document.querySelectorAll('.gameImage')
-    images.forEach((img, idx) => {
-      img.remove()
+
+    boxes.forEach((box, idx) => {
+      box.innerHTML = ""
     })
 
     count = 1
@@ -255,6 +246,7 @@ function checkGameOver() {
 
 function youWin() {
   document.querySelector('.winLose').innerHTML = 'You Won!!!'
+
 }
 
 function youLose() {
@@ -303,12 +295,7 @@ function addImageAsSecondPlayer(element) {
     }
 
     chosenElement = document.querySelector(`#${chosenElementId}`)
-    let img = document.createElement('img')
-
-    img.setAttribute('src', 'tick.jpg')
-    img.className = 'gameImage'
-
-    chosenElement.appendChild(img)
+    chosenElement.innerHTML = 'o'
 
     let id = parseInt(chosenElementId.charAt(3))
 
@@ -323,18 +310,13 @@ function addImageAsSecondPlayer(element) {
 
 
   //If person clicks on used box
-  if (element.className == 'gameImage') {
+  if (element.innerHTML == "x" || element.innerHTML == "o") {
     return
   }
 
   if (count%2 === 0) {
 
-    //person's turn
-    let img = document.createElement('img')
-    img.setAttribute('src', 'cross.jpg')
-    img.className = 'gameImage'
-
-    element.appendChild(img)
+    element.innerHTML = 'x'
 
     let id = parseInt(element.id.charAt(3))
     let position = arr.indexOf(id)
@@ -367,9 +349,6 @@ function addImageAsSecondPlayer(element) {
     return false
   }
 
-  //it runs this code twice sometimes...
-  //solved! due to no return false statement
-  //previously
   if (arr.length === 0) {
     tie()
     resetHelper2()
@@ -385,9 +364,9 @@ function resetHelper2() {
 
   reset.addEventListener('click', () => {
     document.querySelector("body").style.marginTop = '200px'
-    images = document.querySelectorAll('.gameImage')
-    images.forEach((img, idx) => {
-      img.remove()
+
+    boxes.forEach((box, idx) => {
+      box.innerHTML = ""
     })
 
     count = 1
