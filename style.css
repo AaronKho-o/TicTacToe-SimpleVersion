@@ -1,5 +1,6 @@
 body {
   background-color: black;
+  margin-top: 200px;
 }
 
 ul {
@@ -26,7 +27,7 @@ li:nth-of-type(even) {
   text-align: center;
   color: lightgrey;
   margin-left: 35px;
-} 
+}
 
 .grid {
 
