@@ -1,0 +1,63 @@
+body {
+  background-color: black;
+}
+
+ul {
+  display: grid;
+  list-style: none;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 2.5px;
+  width: 300px;
+  height: 300px;
+}
+
+li:nth-of-type(odd) {
+  background: lightgrey;
+  overflow: hidden;
+}
+
+li:nth-of-type(even) {
+  background: lightgrey;
+  overflow: hidden;
+}
+
+.title {
+  text-align: center;
+  color: lightgrey;
+  margin-left: 35px;
+} 
+
+.grid {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameImage {
+  width: 90%;
+  height: 90%;
+  margin: 5%;
+}
+
+.buttonWrapper {
+  text-align: center;
+}
+
+button {
+  margin-left:30px;
+  font-weight: bold;
+}
+
+.winLose {
+  color: lightgrey;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+}
+
+#wl {
+  margin-top: 30px;
+  margin-left: 30px
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class = "container-fluid">
+
+      <div class = "row">
+        <h1 class = "col-12 title">Tic Tac Toe</h1>
+      </div>
+
+      <div class = "row buttonWrapper">
+        <button id='firstPlayer'>Start as 1st Player</button>
+        <button id='secondPlayer'>Start as 2nd Player</button>
+        <button id='reset'>Reset</button>
+      </div>
+
+      <div class='row'>
+        <div class = "grid">
+          <ul>
+            <li class = "box" id="box1"></li>
+            <li class = "box" id="box2"></li>
+            <li class = "box" id="box3"></li>
+            <li class = "box" id="box4"></li>
+            <li class = "box" id="box5"></li>
+            <li class = "box" id="box6"></li>
+            <li class = "box" id="box7"></li>
+            <li class = "box" id="box8"></li>
+            <li class = "box" id="box9"></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class = 'row' id = 'wl'>
+        <div class = 'winLose'></div>
+      </div>
+
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
