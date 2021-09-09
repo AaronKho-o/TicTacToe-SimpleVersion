@@ -27,7 +27,6 @@ let mock = [[10, 10, 10],[10, 10, 10],[10, 10, 10]]
 //The code below are all for 1st player mode
 function startGameAsFirstPlayer() {
   grid.style.display = 'flex'
-  document.querySelector("body").style.marginTop = '100px'
 
   document.querySelectorAll('button').forEach((button, idx) => {
     button.style.display = 'none'
@@ -82,7 +81,6 @@ function addImageAsFirstPlayer(element) {
   }
 
   if (count%2 === 1) {
-
     element.innerHTML = 'O'
 
     let id = parseInt(element.id.charAt(3))
@@ -125,26 +123,17 @@ function addImageAsFirstPlayer(element) {
 
 //helper function
 function getCoordinates(id) {
-  let x
-  let y
 
-  if (id/3 <= 1) {
-    x = 0
-  } else if (id/3 <= 2) {
-    x = 1
-  } else if (id/3 <= 3) {
-    x = 2
-  }
-
-  if (id%3 == 0) {
-    y = 2
-  } else if (id%3 == 1) {
-    y = 0
-  } else if (id%3 == 2) {
-    y = 1
-  }
+  let x = Math.floor((id - 1)/3)
+  let y = (id - 1)%3
 
   return [x, y]
+}
+
+
+function getPosition(coordinates) {
+  let p = coordinates[0] * 3 + coordinates[1] + 1
+  return p
 }
 
 
@@ -156,10 +145,9 @@ function resetHelper1() {
 
   //reset webpage once button is clicked
   reset.addEventListener('click', () => {
-    document.querySelector("body").style.marginTop = '200px'
-
     boxes.forEach((box, idx) => {
       box.innerHTML = ""
+      box.style.color = 'black'
     })
 
     count = 1
@@ -184,59 +172,61 @@ function checkGameOver() {
 
   //check for player's win
   //check horizontal
-  for (i = 0; i < 3; i ++) {
+  for (let i = 0; i < 3; i ++) {
     if (mock[i][0] === 1 && mock[i][1] === 1 && mock[i][2] === 1) {
-      youWin()
+      console.log('hi')
+      console.log(mock[i][0] === 1 && mock[i][1] === 1 && mock[i][2] === 1)
+      youWin([[i,0], [i,1], [i,2]])
       return true
     }
   }
 
   //check vertical
-  for (i = 0; i < 3; i ++) {
+  for (let i = 0; i < 3; i ++) {
     if (mock[0][i] === 1 && mock[1][i] === 1 && mock[2][i] === 1) {
-      youWin()
+      youWin([[0,i], [1,i], [2,i]])
       return true
     }
   }
 
   //check diagonal
   if (mock[0][0] === 1 && mock[1][1] === 1 && mock[2][2] === 1) {
-    youWin()
+    youWin([[0,0],[1,1],[2,2]])
     return true
   }
 
   if (mock[0][2] === 1 && mock[1][1] === 1 && mock[2][0] === 1) {
-    youWin()
+    youWin([[0,2],[1,1],[2,0]])
     return true
   }
 
 
   //check for robot's win
   //check horizontal
-  for (i = 0; i < 3; i ++) {
+  for (let i = 0; i < 3; i ++) {
 
     if (mock[i][0] === 0 && mock[i][1] === 0 && mock[i][2] === 0) {
-      youLose()
+      youLose([[i,0], [i,1], [i,2]])
       return true
     }
   }
 
   //check vertical
-  for (i = 0; i < 3; i ++) {
+  for (let i = 0; i < 3; i ++) {
     if (mock[0][i] === 0 && mock[1][i] === 0 && mock[2][i] === 0) {
-      youLose()
+      youLose([[0,i], [1,i], [2,i]])
       return true
     }
   }
 
   //check diagonal
   if (mock[0][0] === 0 && mock[1][1] === 0 && mock[2][2] === 0) {
-    youLose()
+    youLose([[0,0],[1,1],[2,2]])
     return true
   }
 
-  if (mock[2][0] === 0 && mock[1][1] === 0 && mock[0][2] === 0) {
-    youLose()
+  if (mock[0][2] === 0 && mock[1][1] === 0 && mock[2][0] === 0) {
+    youLose([[0,2],[1,1],[2,0]])
     return true
   }
 
@@ -244,12 +234,22 @@ function checkGameOver() {
 
 }
 
-function youWin() {
+function youWin(coordinates) {
+  console.log(coordinates)
+  for (let i = 0; i < coordinates.length; i ++){
+    let p = getPosition(coordinates[i])
+    document.querySelector(`#box${p}`).style.color = 'red'
+  }
   document.querySelector('.winLose').innerHTML = 'You Won!!!'
 
 }
 
-function youLose() {
+function youLose(coordinates) {
+  console.log(coordinates)
+  for (let i = 0; i < coordinates.length; i ++){
+    let p = getPosition(coordinates[i])
+    document.querySelector(`#box${p}`).style.color = 'red'
+  }
   document.querySelector('.winLose').innerHTML = 'You Lost and I won!'
 }
 
@@ -261,7 +261,6 @@ function tie() {
 //The code below is very similar to above, but for playing as a 2nd player
 function startGameAsSecondPlayer() {
   grid.style.display = 'flex'
-  document.querySelector("body").style.marginTop = '100px';
   document.querySelectorAll('button').forEach((button, idx) => {
     button.style.display = 'none'
   })
@@ -363,10 +362,10 @@ function resetHelper2() {
   window.scrollTo(0, document.body.scrollHeight)
 
   reset.addEventListener('click', () => {
-    document.querySelector("body").style.marginTop = '200px'
 
     boxes.forEach((box, idx) => {
       box.innerHTML = ""
+      box.style.color = 'black'
     })
 
     count = 1
